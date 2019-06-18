@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Records</title>
+        <link rel="stylesheet" href="style.css">
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    </head>
+    <body>
+        <!-- <script src="https://chancejs.com/chance.min.js"></script> -->
+        <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+        <script
+            src="http://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+        <div class="container">
+            <h1>Welcome to your Records</h1>
+            <button type="button" id="buy" class="open-button" onclick="openBuyForm()">BUY</button>
+            <button type="button" id="sell" class="open-button" onclick="openSellForm()">SELL</button>
+        </div>
+
+        <div class="form-popup" id="buyForm">
+                <div class="jumbotrom">
+                    <h3>Add new Purchase</h3>
+                    <form id="inputItemForm" class="form-container">
+                        <div>
+                            <label for="inputItem">ITEM</label>
+                            <input type="text" class="form-control" id="inputItem" placeholder="Enter Item...">
+                        </div>
+                        <div>
+                            <label for="inputQuantity">QUANTITY</label>
+                            <input type="text" class="form-control" id="inputQuantity" placeholder="Enter it's Quantity ...">
+                        </div>
+                        <div>
+                            <label for="inputSeller">SELLER</label>
+                            <input type="text" class="form-control" id="inputSeller" placeholder="Enter it's Seller information...">
+                        </div>
+                        <button type="submit" class="btn" id="addbuybtn" onclick="addBuyClick()">Add</button>
+                        <button type="button" class="btn" id="closebuybtn" onclick="closeBuyForm()">Cancel</button>
+                    </form>
+                </div>
+        </div>
+        <script src="main.js"></script>
+    </body>
+</html>
