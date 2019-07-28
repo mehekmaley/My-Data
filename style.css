@@ -1,4 +1,9 @@
 /* Button used to open the contact form - fixed at the bottom of the page */
+body{
+  background: #eab0dc;
+  font-family: ubuntu;
+}
+
 .open-button {
     background-color: #555;
     color: white;
@@ -10,50 +15,68 @@
 
 /* The popup form - hidden by default */
 .form-popup {
+  display: none;
+  background: #fff;
+  max-width: 960px;
+  margin: 30px auto;
+  padding:  20px 30px;
+  border-radius: 10px 120px 10px 10px;
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.1)
+  }
+
+  .buyh-popup {
     display: none;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    border: solid #f1f1f1;
-    z-index: 100%;
+    background: #fff;
+    max-width: 960px;
+    margin: 30px auto;
+    padding:  20px 30px;
+    border-radius: 10px 120px 10px 10px;
+    box-shadow: 1px 3px 5px rgba(0,0,0,0.1)
   }
 
   /* Add styles to the form container */
-.form-container {
-    
+/* .form-container {
     padding: 10px;
     background-color: white;
+    width: device-width; 
+    max-width: 960px;
   }
-
+*/
   /* Full-width input fields */
-.form-container {
-    width: 100%;
+/*
+  .form-container {
+    max-width: 960px;
     padding: 30px;
     margin: 15px 0 30px 0;
     border: none;
     background: #f1f1f1;
-  }
+  }*/
 
   /* When the inputs get focus, do something */
-.form-container input[type=text]:focus, .form-container input[type=text]:focus, .form-container input[type=text]:focus {
+/*
+  .form-container input[type=text]:focus, .form-container input[type=text]:focus, .form-container input[type=text]:focus {
     background-color: #ddd;
     outline: none;
   }
+  */ 
+
 
   /* Set a style for the submit/login button */
-.form-container .btn {
+.jumbotrom .btn {
     background-color: #4CAF50;
     color: white;
+    text-align: center;
     padding: 16px 20px;
     border: none;
     cursor: pointer;
     width: 50%;
     margin-bottom:10px;
     opacity: 0.8;
+    
   }
 
   /* Add a red background color to the cancel button */
-.form-container .cancel {
+.jumbotrom .cancel {
     background-color: red;
   }
 
@@ -61,3 +84,146 @@
 .form-container .btn:hover, .open-button:hover {
     opacity: 1;
   } 
+/* buy history*/
+
+#buyhL{
+  color: rgb(107, 103, 103);
+  font-size: 40px;
+  letter-spacing: 2px;
+  margin-top: 30px;
+  float:left;
+}
+#seller{
+  color: rgb(107, 103, 103);
+  font-size: 20px;
+  letter-spacing: 2px;
+  margin-top: 20px;
+  float:right;
+}
+#sellerName{
+  color: rgb(107, 103, 103);
+  font-size: 20px;
+  letter-spacing: 2px;
+  margin-top: 20px;
+  float:right;
+}
+
+.buyh-record-popup{
+  display: none;
+  background: #fff;
+  max-width: 960px;
+  margin: 30px auto;
+  padding:  20px 30px;
+  border-radius: 10px 120px 10px 10px;
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.1)
+}
+
+ul{
+  list-style-type: none;
+  padding: 0;
+}
+
+li{
+  padding: 20px;
+  background: #f6f6f6;
+  font-size: 20px;
+  color: #555;
+  position: relative;
+  border-bottom: 1px solid #e6e6e6;
+  height: 46px;
+}
+
+li:nth-child(even){
+  padding: 20px;
+  background: #f2f2f2;
+}
+
+li span{
+  display: block;
+}
+
+li span:nth-child(2){
+  font-size: 16px;
+  margin-top: 6px;
+  color: #999;
+}
+
+li div{
+  position: absolute;
+  top: 0;
+  right: 0px;
+  background: rgba(255,255,255,0.6);
+  width: 40px;
+  text-align: center;
+  padding: 10px 0;
+  font-weight:  bold;
+  cursor:  pointer;
+}
+
+form input{
+  width: 38%;
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid #eee;
+  margin: 0 1%;
+  padding: 10px;
+  display: block;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+  font-size: 18px;
+}
+
+form input:focus{
+  outline: none;
+  border-bottom: 3px solid #88236f;
+  padding-bottom: 8px;
+  transition: all ease 0.2s;
+}
+
+form:after{
+  content: '';
+  clear: both;
+  display: block;
+}
+
+#selector{
+  border: 0;
+  background: rgb(107, 103, 103);
+  border-radius: 10px;
+  padding: 13px;
+  width: 14%;
+  margin-left: 10px;
+  margin-top: 10px;
+  box-shadow: -1px 0px 1px rgba(0,0,0,0.1);
+  font-weight: bold;
+  font-family: ubuntu;
+  letter-spacing: 1px;
+  color: rgb(250, 245, 245);
+}
+
+button{
+  border: 0;
+  background:  rgb(107, 103, 103);
+  border-radius: 10px;
+  padding: 13px;
+  margin: 10px;
+  width: 14%;
+  box-shadow: -1px 0px 1px rgba(0,0,0,0.1);
+  font-weight: bold;
+  font-family: ubuntu;
+  letter-spacing: 1px;
+  color: rgb(250, 245, 245);
+}
+
+th,td{
+  width:400px; 
+  padding: 20px;
+  background: #f6f6f6;
+  text-align:center; 
+  color: #555;
+  border-right:1px solid #555; 
+  border-left:1px solid #555; 
+  border-top:0px;
+  border-bottom:0px;
+  position: relative;
+}
