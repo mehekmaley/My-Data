@@ -53,11 +53,11 @@
     addbuybtn.addEventListener("click",addBuy)
     
     function addBuy() {
-      var dateAdd = firebase.firestore.FieldValue.serverTimestamp()
+      
       
       // var timestampAdd = dateAdd.toDate()
       // var sdateAdd = timestampAdd.toString().slice(0,23)
-      console.log(dateAdd)
+      
        firebase.firestore().collection("buy").doc(inputSeller.value).collection(inputSeller.value).doc().set({
          item: inputItem.value,
          quantity: inputQuantity.value,
@@ -96,12 +96,11 @@
       var cell2 = row.insertCell(2);
       var cell3 = row.insertCell(3);
       var cell4 = row.insertCell(4);
-      var mydate = doc.data().timestamp;
-      // var mydate = doc.data().timestamp.toDate();
-      // var str = mydate.toString();
-      // var putdate = str.slice(0,23); 
+      var mydate = doc.data().timestamp.toDate();
+      var str = mydate.toString();
+      var putdate = str.slice(0,10); 
 
-      cell0.innerHTML = mydate;
+      cell0.innerHTML = putdate;
       cell1.innerHTML = doc.data().item;
       cell2.innerHTML = doc.data().quantity;
       cell3.innerHTML = doc.data().price;
@@ -143,7 +142,7 @@
 
       if(selector.value == "entire") {
 
-         firebase.firestore().collection("buy").doc(inputBuyhSeller.value).collection(inputBuyhSeller.value).get().then((snapshot) => {
+         firebase.firestore().collection("buy").doc(inputBuyhSeller.value).collection(inputBuyhSeller.value).orderBy("timestamp","asc").get().then((snapshot) => {
            snapshot.docs.forEach(doc => {
              renderBuy(doc);
            })
