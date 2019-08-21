@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="heading">
         <h1>Welcome to your Records</h1>
         <button type="button" id="buy" class="open-button" >BUY</button>
         <button type="button" id="sell" class="open-button" >SELL</button>
@@ -40,7 +40,7 @@
                         <input type="number" step="0.01" class="form-control" id="inputPrice" placeholder="Enter Price per KG...">
                     </div>
                 </form>
-                <div style="text-align:center;">
+                <div style="text-align:left;">
                     <button type="reset" value="Reset" class="btn" id="addbuybtn" >Add</button>
                     <button type="button" class="btn cancel" id="closebuybtn" >Cancel</button>
                 </div>
@@ -49,19 +49,32 @@
     <div class="buyh-popup" id="buyhForm">
             <form>
                 <button type="button" id="buyToday">Today's History</button>
-                <button type="button" id="buyWeek">Week History</button>
-                <button type="button" id="buyMonth">Month History</button>
+                <!-- <button type="button" id="buyWeek">Week History</button>
+                <button type="button" id="buyMonth">Month History</button> -->
                 <div id="buyhbyname">
                     <p>See History of particular Seller</p>
                     <label for="buyhSeller">Seller</label>
                     <input type="text" id="buyhSeller" placeholder="Enter Seller's Name...">
-                    <select id="selector">
+                    <button type="button" id="buyTodaySeller">Today</button>
+                    <select id="buyMonthlySeller">
                         
-                        <option value="today">Today's</option>
-                        <option value="week">Week</option>
-                        <option value="month">Month</option>
-                        <option value="entire">Entire</option>
+                        <option>Monthly</option>
+                        <!-- <option value="week">Week</option> -->
+                        <option value="jan">Jan</option>
+                        <option value="feb">Jan</option>
+                        <option value="jan">Jan</option>
+                        <option value="jan">Jan</option>
+                        <option value="jan">Jan</option>
+                        <option value="jan">Jan</option>
+                        <option value="jan">Jan</option>
+                        <option value="jan">Jan</option>
+                        <option value="jan">Jan</option>
+                        <option value="jan">Jan</option>
+                        <option value="jan">Jan</option>
+                        <option value="jan">Jan</option>
+
                     </select>
+                    <button type="button" id="buyEntireSeller">Entire</button>
                    
                 
                 </div>
