@@ -1,28 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- <meta http-equiv="refresh" content="30"> -->
     <title>Document</title>
-   
     <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-firestore.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
     <div class="container" id="heading">
         <h1>Welcome to your Records</h1>
+        <div class="btnsize">
         <button type="button" id="buy" class="open-button" >BUY</button>
         <button type="button" id="sell" class="open-button" >SELL</button>
+        
         <button type="button" id="buyh" class="open-button">BUY HISTORY</button>
+        <button type="button" id="sellh" class="open-button">SELL HISTORY</button>
+        </div>
     </div>
 
     <div class="form-popup" id="buyForm">
             <div class="jumbotrom"> 
                 <h3>Add New Purchase</h3>
-                <form id="inputItemForm" class="form-container">
+                <form id="inputItemFormB" class="form-container">
                     <div>
                         <label for="inputSeller">SELLER</label>
                         <input type="text" class="form-control" id="inputSeller" placeholder="Enter Seller information...">
@@ -46,46 +51,193 @@
                 </div>
             </div>
     </div>
+    <!-- sell form -->
+    <div class="form-popup" id="sellForm">
+        <div class="jumbotrom"> 
+            <h3>Add New Sell</h3>
+            <form id="inputItemFormS" class="form-container">
+                <div>
+                    <label for="inputBuyer">BUYER</label>
+                    <input type="text" class="form-control" id="inputBuyer" placeholder="Enter Buyer name...">
+                </div>
+                <div>
+                    <label for="inputItemS">ITEM</label>
+                    <input type="text" class="form-control" id="inputItemS" placeholder="Enter Item...">
+                </div>
+                <div>
+                    <label for="inputQuantityS">QUANTITY</label>
+                    <input type="number" step="0.5" class="form-control" id="inputQuantityS" placeholder="Enter Quantity ...">
+                </div>
+                <div>
+                    <label for="inputPriceS">PRICE</label>
+                    <input type="number" step="0.01" class="form-control" id="inputPriceS" placeholder="Enter Price per KG...">
+                </div>
+            </form>
+            <div style="text-align:left;">
+                <button type="reset" value="Reset" class="btn" id="addsellbtn" >Add</button>
+                <button type="button" class="btn cancel" id="closesellbtn" >Cancel</button>
+            </div>
+        </div>
+</div>
     <div class="buyh-popup" id="buyhForm">
-            <form>
+          
                 <button type="button" id="buyToday">Today's History</button>
-                <!-- <button type="button" id="buyWeek">Week History</button>
-                <button type="button" id="buyMonth">Month History</button> -->
-                <div id="buyhbyname">
-                    <p>See History of particular Seller</p>
-                    <label for="buyhSeller">Seller</label>
-                    <input type="text" id="buyhSeller" placeholder="Enter Seller's Name...">
-                    <button type="button" id="buyTodaySeller">Today</button>
-                    <select id="buyMonthlySeller">
-                        
+                <button type="button" id="buyEntire">Entire History</button>
+                <div>
+                    <select id="buyMon" class="select-css">
+                                
                         <option>Monthly</option>
                         <!-- <option value="week">Week</option> -->
-                        <option value="jan">Jan</option>
-                        <option value="feb">Jan</option>
-                        <option value="jan">Jan</option>
-                        <option value="jan">Jan</option>
-                        <option value="jan">Jan</option>
-                        <option value="jan">Jan</option>
-                        <option value="jan">Jan</option>
-                        <option value="jan">Jan</option>
-                        <option value="jan">Jan</option>
-                        <option value="jan">Jan</option>
-                        <option value="jan">Jan</option>
-                        <option value="jan">Jan</option>
-
+                        <option value="Jan">Jan</option>
+                        <option value="Feb">Feb</option>
+                        <option value="Mar">Mar</option>
+                        <option value="Apr">Apr</option>
+                        <option value="May">May</option>
+                        <option value="Jun">Jun</option>
+                        <option value="Jul">Jul</option>
+                        <option value="Aug">Aug</option>
+                        <option value="Sep">Sep</option>
+                        <option value="Oct">Oct</option>
+                        <option value="Nov">Nov</option>
+                        <option value="Dec">Dec</option>
+    
                     </select>
-                    <button type="button" id="buyEntireSeller">Entire</button>
-                   
-                
+                    <button type="submit" id="buym">View Monthly Record</button>
                 </div>
-            </form>    
-                <button type="submit" id="buyhrecord">View</button>
+            
+                <div>
+                    <input type="date" name="pDat" id="pDat">  
+                    <button type="submit" id="buyd">View Date Record</button>
+                </div>
+                <!-- <button type="button" id="buyEntireSeller">Entire</button>
+                <button type="button" id="buyEntireSeller">Entire</button> -->
+                <!-- <button type="button" id="buyWeek">Week History</button>
+                <button type="button" id="buyMonth">Month History</button> -->
+                <form>
+                <div id="buyhbyname">
+                    <h2>See History of particular Seller</h2>
+                    <h3><label for="buyhSeller">Seller::</label></h3>
+                    <input type="text" id="buyhSeller" placeholder="Enter Seller's Name...">
+                
+                    <button type="button" id="buyTodaySeller">Today</button>
+                    
+                    <button type="button" id="buyEntireSeller">Entire</button>
+
+                </div>
+            </form>
+              
+            <div>
+                <select id="buyMonthlySeller" class="select-css">
+                            
+                    <option>Monthly</option>
+                    <!-- <option value="week">Week</option> -->
+                    <option value="Jan">Jan</option>
+                    <option value="Feb">Feb</option>
+                    <option value="Mar">Mar</option>
+                    <option value="Apr">Apr</option>
+                    <option value="May">May</option>
+                    <option value="Jun">Jun</option>
+                    <option value="Jul">Jul</option>
+                    <option value="Aug">Aug</option>
+                    <option value="Sep">Sep</option>
+                    <option value="Oct">Oct</option>
+                    <option value="Nov">Nov</option>
+                    <option value="Dec">Dec</option>
+
+                </select>
+                <button type="submit" id="buyms">View Monthly Record</button>
+            </div>
+            <div>
+                <input type="date" name="pdate" id="pdate">  
+                <button type="submit" id="buyds">View Date Record</button>
+            </div>
     </div>
-    <div class="buyh-record-popup" id="buyrecord">
-            <h1 id="buyhL" >Buy History</h1>
+    <!-- sell history -->
+    <div class="buyh-popup" id="sellhForm">
+          
+                <button type="button" id="sellToday">Today's History</button>
+                <button type="button" id="sellEntire">Entire History</button>
+                <div>
+                    <select id="sellMon" class="select-css">
+                                
+                        <option>Monthly</option>
+                        <!-- <option value="week">Week</option> -->
+                        <option value="Jan">Jan</option>
+                        <option value="Feb">Feb</option>
+                        <option value="Mar">Mar</option>
+                        <option value="Apr">Apr</option>
+                        <option value="May">May</option>
+                        <option value="Jun">Jun</option>
+                        <option value="Jul">Jul</option>
+                        <option value="Aug">Aug</option>
+                        <option value="Sep">Sep</option>
+                        <option value="Oct">Oct</option>
+                        <option value="Nov">Nov</option>
+                        <option value="Dec">Dec</option>
+    
+                    </select>
+                    <button type="submit" id="sellm">View Monthly Record</button>
+                </div>
+            
+                <div>
+                    <input type="date" name="pDat" id="sellDat">  
+                    <button type="submit" id="selld">View Date Record</button>
+                </div>
+                <!-- <button type="button" id="buyEntireSeller">Entire</button>
+                <button type="button" id="buyEntireSeller">Entire</button> -->
+                <!-- <button type="button" id="buyWeek">Week History</button>
+                <button type="button" id="buyMonth">Month History</button> -->
+                <form>
+                <div id="sellhbyname">
+                    <h2>See History of particular Buyer</h2>
+                    <h3><label for="buyername">Buyer::</label></h3>
+                    <input type="text" id="buyername" placeholder="Enter Buyer's Name...">
+                
+                    <button type="button" id="sellTB">Today</button>
+                    
+                    <button type="button" id="sellEB">Entire</button>
+
+                </div>
+            </form>
+              
+            <div>
+                <select id="sellMonthlyBuyer" class="select-css">
+                            
+                    <option>Monthly</option>
+                    <!-- <option value="week">Week</option> -->
+                    <option value="Jan">Jan</option>
+                    <option value="Feb">Feb</option>
+                    <option value="Mar">Mar</option>
+                    <option value="Apr">Apr</option>
+                    <option value="May">May</option>
+                    <option value="Jun">Jun</option>
+                    <option value="Jul">Jul</option>
+                    <option value="Aug">Aug</option>
+                    <option value="Sep">Sep</option>
+                    <option value="Oct">Oct</option>
+                    <option value="Nov">Nov</option>
+                    <option value="Dec">Dec</option>
+
+                </select>
+                <button type="submit" id="sellmb">View Monthly Record</button>
+            </div>
+            <div>
+                <input type="date" name="pdate" id="selldateb">  
+                <button type="submit" id="selldb">View Date Record</button>
+            </div>
+    </div>
+    
+    <div class="buyh-record-popup" id="buyrecord"> 
+            <div class="sellerName" id="sellerName">   
+            </div>
+            <label id="buyhL" >Buy History</label>
+            <div id="linktodBuy">
+                <button id="create_pdf"><i class="fa fa-arrow-circle-down"></i></button>
+            </div>
+           
             <div class="sellerName" id="sellerName">
                
-            </div>
+            
             <form id="buy-history"></form>
 
             <table id="buy-list">
@@ -97,8 +249,41 @@
                     <th>TOTAL</TOTAL>
                 </tr>
             </table>
+       
     </div>
+    <!-- sell historyrecord -->
+    <div class="buyh-record-popup" id="sellrecord">
+        <div class="buyerName" id="buyerNameH"></div>
+        <br/>
+        <label id="sellhL" >Sell History</label>
+        
+        <div id="linktodSell">
+            <button id="create_pdf_sell"><i class="fa fa-arrow-circle-down"></i></button>
+        </div>
+        <form id="sell-history"></form>
+
+        <table id="sell-list">
+            <tr>
+                <th>TIME</th>
+                <th>ITEM</th>
+                <th>QUANTITY</th>
+                <th>PRICE</th>
+                <th>TOTAL</th> 
+                <th>BUYER</th>  
+            </tr>
+        </table>
+</div>
 
     <script src="main.js" ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/MrRio/jsPDF/master/dist/jspdf.min.js">
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/niklasvh/html2canvas/0.5.0-alpha2/dist/html2canvas.min.js">
+    </script>
+    <script type="text/javascript" src="ss.js"></script>
+    <script type="text/javascript" src="ss_sell.js"></script>
+
+  
 </body>
 </html>
