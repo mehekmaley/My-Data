@@ -75,7 +75,6 @@
       tableEntireS(str);
       firebase.firestore().collectionGroup("historyS").orderBy("timestamp","desc").get().then((snapshot) => {
         snapshot.docs.forEach(doc => {
-    
           renderTodayS(doc);
           
         })
@@ -430,7 +429,7 @@
       
     }
     function renderTodayS(doc){
-    
+      
       var row = tableS.insertRow(-1);
       var cell0 = row.insertCell(0);
       var cell1 = row.insertCell(1);
@@ -507,7 +506,7 @@
 
 
     function tableEntireS(str) { 
-     
+      
       document.getElementById("sell-list").innerHTML = "";
       document.getElementById("buyerNameH").innerHTML = str;
      
