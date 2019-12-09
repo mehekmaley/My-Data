@@ -1,26 +1,555 @@
+<!DOCTYPE html>
 <html>
 <head>
-  <title>Admin Login</title>
-  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
-  <link rel="stylesheet" href="login.css" />
-  <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-firestore.js"></script>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Data</title>
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-auth.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
+    <div class="container" id="heading">
+        <h1>Welcome to your Records</h1>
+        <div class="btnsize">
+        <button type="button" id="buy" class="open-button" >BUY</button>
+        <button type="button" id="sell" class="open-button" >SELL</button>
+        
+        <button type="button" id="buyh" class="open-button">BUY HISTORY</button>
+        <button type="button" id="sellh" class="open-button">SELL HISTORY</button>
+        <button type="button" id="stock" class="open-button">STOCK</button>
+        <button type="button" id="setup" class="open-button">SETUP</button>
+        <button type="button" id="logout" class="open-button">LOG OUT</button>
+        </div>
+    </div>
 
-  <div id="login_div" class="main-div">
-    <h3>Admin Login</h3>
-    <input type="email" placeholder="Email..." id="email_field" />
-    <input type="password" placeholder="Password..." id="password_field" />
+    <div class="form-popup" id="buyForm">
+        <div class="jumbotrom"> 
+            <h3>Add New Purchase</h3>
+            <form id="inputItemFormB" class="form-container">
+                <div>
+                    <label for="inputSeller">Seller Name</label>
+                    <input type="text" class="form-control" id="inputSeller" placeholder="Enter Seller Name...">
+                </div>
+                <div>
+                    <label>Seller Code</label>
+                    <input type="text" class="form-control" id="iscode" placeholder="Enter Seller code...">
+                </div>
+                <div>
+                    <label>Address</label>
+                    <input type="text" class="form-control" id="isaddr" placeholder="Enter Seller address...">
+                </div>
+                <div>
+                    <label>Phone</label>
+                    <input type="text" class="form-control" id="isphone" placeholder="Enter Seller phone...">
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input type="text" class="form-control" id="isemail" placeholder="Enter Seller email...">
+                </div>
+                <div>
+                    <label>Fax No</label>
+                    <input type="number" class="form-control" id="isfaxno" placeholder="Enter Seller faxno...">
+                </div>
+                <div>
+                    <label>GST No</label>
+                    <input type="number" class="form-control" id="isgstno" placeholder="Enter Seller gstno...">
+                </div>
+                <div id="additem">
+                    <div>
+                        <label for="inputItem">ITEM </label>
+                        <!-- <input type="text" class="form-control" id="inputItem" placeholder="Enter Item..."> -->
+                        <select id="inputItem" class="selectpicker">
+                            
+                            <!-- <option>Item Available</option> -->
+                            <!-- <option value="week">Week</option> -->
+                            <option value="prawns">Prawns</option>
+                            <option value="basa">Basa</option>
+                           
+        
+                        </select>
+                    </div>
+                    <div>
+                        <label for="inputQuantity">QUANTITY</label>
+                        <input type="number" step="0.5" class="form-control" id="inputQuantity" placeholder="Enter Quantity ...">
+                    </div>
+                    <div>
+                        <label for="inputPrice">PRICE</label>
+                        <input type="number" step="0.01" class="form-control" id="inputPrice" placeholder="Enter Price per KG...">
+                    </div>
+                    <div id="payitem">
+                            <div>
+                                <label for="inputItem">PAY </label>
+                                <!-- <input type="text" class="form-control" id="inputItem" placeholder="Enter Item..."> -->
+                                <select id="ipay" class="selectpicker">
+                                    
+                                    <!-- <option>Item Available</option> -->
+                                    <!-- <option value="week">Week</option> -->
+                                    <option value="COD">COD</option>
+                                    <option value="UPI">UPI</option>
+                                    <option value="Credit">Credit</option>
+                                    <option value="Debit">Debit</option>
+                                   
+                
+                                </select>
+                            </div>
+                            <div>
+                                    <label>HSN</label>
+                                    <input type="number" step="0.01" class="form-control" id="ihsn" placeholder="Enter HSN...">
+                                </div>
+                    <div>
+                        <label>Discount (%)</label>
+                        <input type="number" step="0.01" class="form-control" id="idisc" placeholder="Enter Discount...">
+                    </div>
+                    <div>
+                        <label>CGST Rate</label>
+                        <input type="number" step="0.01" class="form-control" id="icgst" placeholder="Enter CGST...">
+                    </div>
+                    <div>
+                        <label>SGST Rate</label>
+                        <input type="number" step="0.01" class="form-control" id="isgst" placeholder="Enter SGST...">
+                    </div>
+                </div>
+            </div>
+            </form>
+            <div style="text-align:left;">
+                <button type="reset" value="Reset" class="btn" id="addbuybtn" >Add</button>
+                <button type="button" class="btn cancel" id="closebuybtn" >Cancel</button>
+            </div>
+        </div>
+    </div>
+    <!-- sell form -->
+    <div class="form-popup" id="sellForm">
+        <div class="jumbotrom"> 
+            <h3>Add New Sell</h3>
+            <form id="inputItemFormS" class="form-container">
+                <div>
+                    <label for="inputBuyer">BUYER</label>
+                    <input type="text" class="form-control" id="inputBuyer" placeholder="Enter Buyer name...">
+                </div>
+                <div>
+                    <label for="inputItemS">ITEM</label>
+                    <input type="text" class="form-control" id="inputItemS" placeholder="Enter Item...">
+                </div>
+                <div>
+                    <label for="inputQuantityS">QUANTITY</label>
+                    <input type="number" step="0.5" class="form-control" id="inputQuantityS" placeholder="Enter Quantity ...">
+                </div>
+                <div>
+                    <label for="inputPriceS">PRICE</label>
+                    <input type="number" step="0.01" class="form-control" id="inputPriceS" placeholder="Enter Price per KG...">
+                </div>
+            </form>
+            <div style="text-align:left;">
+                <button type="reset" value="Reset" class="btn" id="addsellbtn" >Add</button>
+                <button type="button" class="btn cancel" id="closesellbtn" >Cancel</button>
+            </div>
+        </div>
+</div>
+<div>
+    <div class="setup-popup" id="setupForm">
+        <button type="button" id="companyP">Company Profile</button>
+        <button type="button" id="items">Items</button>
+        <button type="button" id="companyP">Supplier</button>
+        <button type="button" id="companyP">Customer</button>
+         
+    </div>
+</div>
+<!-- <div>
+        <div class="stock-popup" id="stockForm">
+            <button type="button" id="stockin">Initial Stock</button>
+            <button type="button" id="stockh">Stock on Hand</button>
+            <button type="button" id="companyP">Supplier</button>
+            <button type="button" id="companyP">Customer</button> 
+             
+        </div>
+    </div> -->
+    <div class="stock-popup" id="stock-popup"> 
+            
+            <label id="buyhL" >Stock</label>
+            <div id="linktodBuy">
+                <button id="create_pdf"><i class="fa fa-arrow-circle-down"></i></button>
+            </div>
+       
+            <!-- <form id="buy-history"></form> -->
 
-    <button id="login">Login to Account</button>
-  </div>
+            <table id="istock-list">
+                <tr>
+                    <th>ITEM NAME</th>
+                    <th>SELLING PRICE</th>
+                    <th>DISCOUNT</th>
+                    <th>PURCHASE RATE</th>
+                    <th>MINIMUM</th>
+                    <th>INITIAL</th>
+                    <th>STOCK ON HAND</th>
+                    <th>STATUS</TOTAL>
+                </tr>
+            </table>
+       </div>
+<div>
+    <div class="company-popup" id="companyForm">
+        <div class="jumbotrom"> 
+            <h3>Company Profile</h3>
+            <form id="inputCompany" class="form-container">
+                <div>
+                    <label for="inputCname">Company Name</label>
+                    <input type="text" class="form-control" id="iCname" placeholder="Enter Company Name...">
+                </div>
+                <div>
+                    <label for="inputCaddr">Address</label>
+                    <input type="text" class="form-control" id="iCaddr" placeholder="Enter Address(area,city,state)...">
+                </div>
+                <div>
+                    <label for="iCphone">Phone</label>
+                    <input type="number" class="form-control" id="iCphone" placeholder="Enter Phone..>
+                </div>
+                <div>
+                    <label for="iCfax">Fax No</label>
+                    <input type="number" class="form-control" id="iCfax" placeholder="Enter Fax No...">
+                </div>
+                <div>
+                    <label for="iCpno">Pan No</label>
+                    <input type="number" class="form-control" id="iCpno" placeholder="Enter Pan No...">
+                </div>
+                <div>
+                    <label for="iCemail">Email</label>
+                    <input type="text" class="form-control" id="iCemail" placeholder="Enter Email...">
+                </div>
+            </form>
+            <div style="text-align:left;">
+                <button type="submit" class="btn" id="saveCompany" >Save</button>
+                <button type="button" class="btn cancel" id="closebtn" >Cancel</button>
+            </div>
+        </div>
+         
+    </div>
+</div>
+<div>
+    <div class="items-popup" id="itemsForm">
+        <div class="jumbotrom"> 
+            <h3>Items</h3>
+            <form id="inputItems" class="form-container">
+                <div>
+                    <label>Item Name</label>
+                    <input type="text" class="form-control" id="itemname" placeholder="Enter Item Name...">
+                </div>
+                <div>
+                    <label>Selling Price</label>
+                    <input type="number" class="form-control" id="itemSprice" placeholder="Enter Selling Price...">
+                </div>
+                <div>
+                    <label>Discount %</label>
+                    <input type="number" class="form-control" id="itemdiscount" placeholder="Enter Discount ...">
+                </div>
+                <div>
+                    <label>Purchase Rate</label>
+                    <input type="number" class="form-control" id="itemPrate" placeholder="Enter Purchase rate...">
+                </div>
+                <div>
+                    <label>Minimum Stock</label>
+                    <input type="number" class="form-control" id="itemStock" placeholder="Enter Minimum Stock...">
+                </div>
+                <div>
+                        <label>Initial Stock</label>
+                        <input type="number" class="form-control" id="istock" placeholder="Enter Initial Stock...">
+                    </div>
+                <div>
+                    <label>Status</label>
+                    <input type="text" class="form-control" id="itemStatus" placeholder="Enter Active or Inactive...">
+                </div>
+            
+            </form>
+            <div style="text-align:left;">
+                <button type="submit" class="btn" id="saveItem" >Save</button>
+                <button type="button" class="btn cancel" id="closebtn" >Cancel</button>
+            </div>
+        </div>
+         
+    </div>
+</div>
+    <div class="buyh-popup" id="buyhForm">
+          
+                <button type="button" id="buyToday">Today's History</button>
+                <button type="button" id="buyEntire">Entire History</button>
+                <div>
+                    <select id="buyMon" class="select-css">
+                                
+                        <option>Monthly</option>
+                        <!-- <option value="week">Week</option> -->
+                        <option value="Jan">Jan</option>
+                        <option value="Feb">Feb</option>
+                        <option value="Mar">Mar</option>
+                        <option value="Apr">Apr</option>
+                        <option value="May">May</option>
+                        <option value="Jun">Jun</option>
+                        <option value="Jul">Jul</option>
+                        <option value="Aug">Aug</option>
+                        <option value="Sep">Sep</option>
+                        <option value="Oct">Oct</option>
+                        <option value="Nov">Nov</option>
+                        <option value="Dec">Dec</option>
+    
+                    </select>
+                    <button type="submit" id="buym">View Monthly Record</button>
+                </div>
+            
+                <div>
+                    <input type="date" name="pDat" id="pDat">  
+                    <button type="submit" id="buyd">View Date Record</button>
+                </div>
+                <!-- <button type="button" id="buyEntireSeller">Entire</button>
+                <button type="button" id="buyEntireSeller">Entire</button> -->
+                <!-- <button type="button" id="buyWeek">Week History</button>
+                <button type="button" id="buyMonth">Month History</button> -->
+                <form>
+                <div id="buyhbyname">
+                    <h2>See History of particular Seller</h2>
+                    <h3><label for="buyhSeller">Seller::</label></h3>
+                    <input type="text" id="buyhSeller" placeholder="Enter Seller's Name...">
+                
+                    <button type="button" id="buyTodaySeller">Today</button>
+                    
+                    <button type="button" id="buyEntireSeller">Entire</button>
 
+                </div>
+            </form>
+              
+            <div>
+                <select id="buyMonthlySeller" class="select-css">
+                            
+                    <option>Monthly</option>
+                    <!-- <option value="week">Week</option> -->
+                    <option value="Jan">Jan</option>
+                    <option value="Feb">Feb</option>
+                    <option value="Mar">Mar</option>
+                    <option value="Apr">Apr</option>
+                    <option value="May">May</option>
+                    <option value="Jun">Jun</option>
+                    <option value="Jul">Jul</option>
+                    <option value="Aug">Aug</option>
+                    <option value="Sep">Sep</option>
+                    <option value="Oct">Oct</option>
+                    <option value="Nov">Nov</option>
+                    <option value="Dec">Dec</option>
 
+                </select>
+                <button type="submit" id="buyms">View Monthly Record</button>
+            </div>
+            <div>
+                <input type="date" name="pdate" id="pdate">  
+                <button type="submit" id="buyds">View Date Record</button>
+            </div>
+    </div>
+    <div class="buyh-popup" id="buyhForm">
+          
+                <button type="button" id="buyToday">Today's History</button>
+                <button type="button" id="buyEntire">Entire History</button>
+                <div>
+                    <select id="buyMon" class="select-css">
+                                
+                        <option>Monthly</option>
+                        <!-- <option value="week">Week</option> -->
+                        <option value="Jan">Jan</option>
+                        <option value="Feb">Feb</option>
+                        <option value="Mar">Mar</option>
+                        <option value="Apr">Apr</option>
+                        <option value="May">May</option>
+                        <option value="Jun">Jun</option>
+                        <option value="Jul">Jul</option>
+                        <option value="Aug">Aug</option>
+                        <option value="Sep">Sep</option>
+                        <option value="Oct">Oct</option>
+                        <option value="Nov">Nov</option>
+                        <option value="Dec">Dec</option>
+    
+                    </select>
+                    <button type="submit" id="buym">View Monthly Record</button>
+                </div>
+            
+                <div>
+                    <input type="date" name="pDat" id="pDat">  
+                    <button type="submit" id="buyd">View Date Record</button>
+                </div>
+                <!-- <button type="button" id="buyEntireSeller">Entire</button>
+                <button type="button" id="buyEntireSeller">Entire</button> -->
+                <!-- <button type="button" id="buyWeek">Week History</button>
+                <button type="button" id="buyMonth">Month History</button> -->
+                <form>
+                <div id="buyhbyname">
+                    <h2>See History of particular Seller</h2>
+                    <h3><label for="buyhSeller">Seller::</label></h3>
+                    <input type="text" id="buyhSeller" placeholder="Enter Seller's Name...">
+                
+                    <button type="button" id="buyTodaySeller">Today</button>
+                    
+                    <button type="button" id="buyEntireSeller">Entire</button>
 
-  <!-- <script src="js/config.js"></script> -->
-  <script src="login.js"></script>
+                </div>
+            </form>
+              
+            <div>
+                <select id="buyMonthlySeller" class="select-css">
+                            
+                    <option>Monthly</option>
+                    <!-- <option value="week">Week</option> -->
+                    <option value="Jan">Jan</option>
+                    <option value="Feb">Feb</option>
+                    <option value="Mar">Mar</option>
+                    <option value="Apr">Apr</option>
+                    <option value="May">May</option>
+                    <option value="Jun">Jun</option>
+                    <option value="Jul">Jul</option>
+                    <option value="Aug">Aug</option>
+                    <option value="Sep">Sep</option>
+                    <option value="Oct">Oct</option>
+                    <option value="Nov">Nov</option>
+                    <option value="Dec">Dec</option>
 
+                </select>
+                <button type="submit" id="buyms">View Monthly Record</button>
+            </div>
+            <div>
+                <input type="date" name="pdate" id="pdate">  
+                <button type="submit" id="buyds">View Date Record</button>
+            </div>
+    </div>
+    <!-- sell history -->
+    <div class="buyh-popup" id="sellhForm">
+          
+                <button type="button" id="sellToday">Today's History</button>
+                <button type="button" id="sellEntire">Entire History</button>
+                <div>
+                    <select id="sellMon" class="select-css">
+                                
+                        <option>Monthly</option>
+                        <!-- <option value="week">Week</option> -->
+                        <option value="Jan">Jan</option>
+                        <option value="Feb">Feb</option>
+                        <option value="Mar">Mar</option>
+                        <option value="Apr">Apr</option>
+                        <option value="May">May</option>
+                        <option value="Jun">Jun</option>
+                        <option value="Jul">Jul</option>
+                        <option value="Aug">Aug</option>
+                        <option value="Sep">Sep</option>
+                        <option value="Oct">Oct</option>
+                        <option value="Nov">Nov</option>
+                        <option value="Dec">Dec</option>
+    
+                    </select>
+                    <button type="submit" id="sellm">View Monthly Record</button>
+                </div>
+            
+                <div>
+                    <input type="date" name="pDat" id="sellDat">  
+                    <button type="submit" id="selld">View Date Record</button>
+                </div>
+                <!-- <button type="button" id="buyEntireSeller">Entire</button>
+                <button type="button" id="buyEntireSeller">Entire</button> -->
+                <!-- <button type="button" id="buyWeek">Week History</button>
+                <button type="button" id="buyMonth">Month History</button> -->
+                <form>
+                <div id="sellhbyname">
+                    <h2>See History of particular Buyer</h2>
+                    <h3><label for="buyername">Buyer::</label></h3>
+                    <input type="text" id="buyername" placeholder="Enter Buyer's Name...">
+                
+                    <button type="button" id="sellTB">Today</button>
+                    
+                    <button type="button" id="sellEB">Entire</button>
+
+                </div>
+            </form>
+              
+            <div>
+                <select id="sellMonthlyBuyer" class="select-css">
+                            
+                    <option>Monthly</option>
+                    <!-- <option value="week">Week</option> -->
+                    <option value="Jan">Jan</option>
+                    <option value="Feb">Feb</option>
+                    <option value="Mar">Mar</option>
+                    <option value="Apr">Apr</option>
+                    <option value="May">May</option>
+                    <option value="Jun">Jun</option>
+                    <option value="Jul">Jul</option>
+                    <option value="Aug">Aug</option>
+                    <option value="Sep">Sep</option>
+                    <option value="Oct">Oct</option>
+                    <option value="Nov">Nov</option>
+                    <option value="Dec">Dec</option>
+
+                </select>
+                <button type="submit" id="sellmb">View Monthly Record</button>
+            </div>
+            <div>
+                <input type="date" name="pdate" id="selldateb">  
+                <button type="submit" id="selldb">View Date Record</button>
+            </div>
+    </div>
+    
+    <div class="buyh-record-popup" id="buyrecord"> 
+            <div class="sellerName" id="sellerName">   
+            </div>
+            <label id="buyhL" >Buy History</label>
+            <div id="linktodBuy">
+                <button id="create_pdf"><i class="fa fa-arrow-circle-down"></i></button>
+            </div>
+           
+            <div class="sellerName" id="sellerName">
+            </div>
+            
+            <form id="buy-history"></form>
+
+            <table id="buy-list">
+                <tr>
+                    <th>TIME</th>
+                    <th>ITEM</th>
+                    <th>QUANTITY</th>
+                    <th>PRICE</th>
+                    <th>TOTAL</TOTAL>
+                </tr>
+            </table>
+       </div>
+    
+    <!-- sell historyrecord -->
+    <div class="buyh-record-popup" id="sellrecord">
+        <div class="buyerName" id="buyerNameH"></div>
+        <br/>
+        <label id="sellhL" >Sell History</label>
+        
+        <div id="linktodSell">
+            <button id="create_pdf_sell"><i class="fa fa-arrow-circle-down"></i></button>
+        </div>
+        <form id="sell-history"></form>
+
+        <table id="sell-list">
+            <tr>
+                <th>TIME</th>
+                <th>ITEM</th>
+                <th>QUANTITY</th>
+                <th>PRICE</th>
+                <th>TOTAL</th> 
+                <th>BUYER</th>  
+            </tr>
+        </table>
+    </div>
+
+    <script src="main.js" ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/MrRio/jsPDF/master/dist/jspdf.min.js">
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/niklasvh/html2canvas/0.5.0-alpha2/dist/html2canvas.min.js">
+    </script>
+    <script type="text/javascript" src="ss.js"></script>
+    <script type="text/javascript" src="ss_sell.js"></script>
+
+  
 </body>
 </html>

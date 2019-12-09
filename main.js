@@ -22,7 +22,7 @@
       
       }
       else{
-        window.location.href = 'index.html'
+        window.location.href = 'login.html'
       }
       });
 
@@ -1122,7 +1122,7 @@
     function logo() {
         
         firebase.auth().signOut();
-        window.location.href = "index.html"
+        window.location.href = "login.html"
       
     }
     selld.addEventListener('click',sellDate);
