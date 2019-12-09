@@ -15,7 +15,18 @@
   
     //User Form
   
-
+    firebase.auth().onAuthStateChanged(function(user) {
+      if(user) {
+       
+      
+            window.location.href = 'index1.html';
+      
+        
+      }
+      else{
+        window.location.href = 'index.html'
+      }
+      });
 
 
     var str;
@@ -1113,7 +1124,7 @@
     function logo() {
         
         firebase.auth().signOut();
-        window.location.href = "login.html"
+        window.location.href = "index.html"
       
     }
     selld.addEventListener('click',sellDate);
