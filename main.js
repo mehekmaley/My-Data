@@ -17,11 +17,9 @@
   
     firebase.auth().onAuthStateChanged(function(user) {
       if(user) {
-       
+        // window.location.href = 'index1.html';
+        console.log("hi")
       
-            window.location.href = 'index1.html';
-      
-        
       }
       else{
         window.location.href = 'index.html'
