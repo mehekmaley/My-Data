@@ -214,6 +214,47 @@ body{
   letter-spacing: 2px;
   
 }
+.selectpicker{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 30%;
+  margin-left:20px;
+}
+
+.setup-popup{
+  display: none;
+  background: #fff;
+  max-width: device-width;
+  padding: 10px 10px;
+  border-radius: 10px 120px 10px 10px;
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.1)
+}
+.stock-popup{
+  display: none;
+  background: #fff;
+  max-width: device-width;
+  padding: 10px 10px;
+  border-radius: 10px 120px 10px 10px;
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.1)
+}
+.company-popup{
+  display: none;
+  background: #fff;
+  max-width: device-width;
+  margin-top: 20px;
+  padding: 10px 10px;
+  border-radius: 10px 120px 10px 10px;
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.1)
+}
+.items-popup{
+  display: none;
+  background: #fff;
+  max-width: device-width;
+  margin-top: 20px;
+  padding: 10px 10px;
+  border-radius: 10px 120px 10px 10px;
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.1)
+}
 
 .buyh-record-popup{
   /* display: none; */
@@ -433,3 +474,4 @@ input[type="date"], focus {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
 }
+

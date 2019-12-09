@@ -14,29 +14,63 @@
     // app_firebase = firebase;
   
     //User Form
-   
+  
+
+
 
     var str;
     var sell = document.getElementById('sell');
     var sellh = document.getElementById('sellh');
     sellh.addEventListener('click',openSellh);
     function openSellh() {
+      // document.getElementById("buyrecord").style.display = "none";
+      // document.getElementById("sellrecord").style.display = "none";
+      // document.getElementById("buyhForm").style.display = "none";
+      // document.getElementById("buyForm").style.display = "none";
+      // document.getElementById('sellForm').style.display = 'none';
+      // document.getElementById('itemsForm').style.display = 'none';
+      // document.getElementById('companyForm').style.display = 'none';
+      // document.getElementById('stock-popup').style.display = 'none';
+      // document.getElementById('sellhForm').style.display = 'block';
+      // document.getElementById('setupForm').style.display = 'none';
+
+      document.getElementById('stock-popup').style.display ='none'
+      document.getElementById('setupForm').style.display = 'none';
+      document.getElementById('companyForm').style.display = 'none';
+      document.getElementById('itemsForm').style.display = 'none';
+      document.getElementById('sellhForm').style.display = 'block';
+      document.getElementById("sellForm").style.display = "none";
+      document.getElementById("buyForm").style.display = "none";
+      document.getElementById("buyhForm").style.display = "none";
       document.getElementById("buyrecord").style.display = "none";
       document.getElementById("sellrecord").style.display = "none";
-      document.getElementById("buyhForm").style.display = "none";
-      document.getElementById("buyForm").style.display = "none";
-      document.getElementById('sellForm').style.display = 'none';
-      document.getElementById('sellhForm').style.display = 'block';
       
     }
     sell.addEventListener('click',openSell);
     function openSell() {
+      // document.getElementById('sellhForm').style.display = 'none';
+      // document.getElementById("buyrecord").style.display = "none";
+      // document.getElementById("sellrecord").style.display = "none";
+      // document.getElementById("buyhForm").style.display = "none";
+      // document.getElementById("buyForm").style.display = "none";
+      // document.getElementById('itemsForm').style.display = 'none';
+      // document.getElementById('companyForm').style.display = 'none';
+      // document.getElementById('stock-popup').style.display = 'none';
+      // document.getElementById('setup-popup').style.display = 'none';
+      // document.getElementById('sellForm').style.display = 'block';
+      // document.getElementById('setupForm').style.display = 'none';
+
+      document.getElementById('stock-popup').style.display ='none'
+      document.getElementById('setupForm').style.display = 'none';
+      document.getElementById('companyForm').style.display = 'none';
+      document.getElementById('itemsForm').style.display = 'none';
       document.getElementById('sellhForm').style.display = 'none';
+      document.getElementById("sellForm").style.display = "block";
+      document.getElementById("buyForm").style.display = "none";
+      document.getElementById("buyhForm").style.display = "none";
       document.getElementById("buyrecord").style.display = "none";
       document.getElementById("sellrecord").style.display = "none";
-      document.getElementById("buyhForm").style.display = "none";
-      document.getElementById("buyForm").style.display = "none";
-      document.getElementById('sellForm').style.display = 'block';
+      console.log("chal")
       
     }
     var buyToday = document.getElementById("buyToday");
@@ -221,6 +255,17 @@
     var inputItem = document.getElementById("inputItem");
     var inputQuantity = document.getElementById("inputQuantity");
     var inputPrice = document.getElementById("inputPrice");
+    var iscode = document.getElementById("iscode")
+    var isaddr = document.getElementById("isaddr")
+    var isphone = document.getElementById("isphone")
+    var isemail = document.getElementById('isemail')
+    var isfaxno = document.getElementById('isfaxno')
+    var idisc = document.getElementById('idisc')
+    var isgstno = document.getElementById('isgstno')
+    var icgst = document.getElementById("icgst")
+    var isgst = document.getElementById("isgst")
+    var ipay = document.getElementById("ipay");
+    var ihsn = document.getElementById("ihsn")
     var inputBuyhSeller = document.getElementById("buyhSeller");
     var buyhrecord= document.getElementById("buyhrecord");
     var selector = document.getElementById("selector");
@@ -246,6 +291,202 @@
     var read = 0;
     var buyts = document.getElementById("buyTodaySeller");
     var buyes = document.getElementById("buyEntireSeller");
+    var setup = document.getElementById("setup");
+    var companyP = document.getElementById("companyP");
+    var saveCompany = document.getElementById("saveCompany")
+    var iCname = document.getElementById("iCname");
+    var iCaddr = document.getElementById("iCaddr");
+    var iCphone = document.getElementById("iCphone");
+    var iCfax = document.getElementById("iCfax");
+    var iCpno = document.getElementById("iCpno");
+    var iCemail = document.getElementById("iCemail");
+    var items = document.getElementById("items")
+    items.addEventListener('click',addItem)
+    var saveItem = document.getElementById("saveItem")
+    saveItem.addEventListener('click',saveI)
+    var itemname = document.getElementById("itemname")
+    var itemSprice = document.getElementById("itemSprice")
+    var itemdiscount = document.getElementById("itemdiscount")
+    var itemPrate = document.getElementById("itemPrate")
+    var itemStatus = document.getElementById("itemStatus")
+    var minstock = document.getElementById('itemStock')
+    var istock = document.getElementById('istock');
+    var stock = document.getElementById('stock')
+    var stockh = document.getElementById("stockh")
+    stock.addEventListener('click',stocks)
+    function stocks() {
+      document.getElementById('stock-popup').style.display ='block'
+      document.getElementById('setupForm').style.display = 'none';
+      document.getElementById('companyForm').style.display = 'none';
+      document.getElementById('itemsForm').style.display = 'none';
+      document.getElementById('sellhForm').style.display = 'none';
+      document.getElementById("sellForm").style.display = "none";
+      document.getElementById("buyForm").style.display = "none";
+      document.getElementById("buyhForm").style.display = "none";
+      document.getElementById("buyrecord").style.display = "none";
+      document.getElementById("sellrecord").style.display = "none";
+      tablestock();
+      firebase.firestore().collection("items").get().then((snapshot) => {
+
+        snapshot.docs.forEach(doc => {
+          
+          renderStock(doc);
+          
+        })
+      });
+
+    }
+    var istable = document.getElementById("istock-list");
+    function tablestock() {
+      document.getElementById("istock-list").innerHTML = "";
+      var row = istable.insertRow(0);
+      var cell0 = row.insertCell(0);
+      var cell1 = row.insertCell(1);
+      var cell2 = row.insertCell(2);
+      var cell3 = row.insertCell(3);
+      var cell4 = row.insertCell(4);
+      var cell5 = row.insertCell(5);
+      var cell6 = row.insertCell(6);
+      var cell7 = row.insertCell(7);
+      cell0.innerHTML = "Item Name";
+      cell1.innerHTML = "Selling Price";
+      cell2.innerHTML = "Discount";
+      cell3.innerHTML = "Purchase Rate";
+      cell4.innerHTML = "Minimum Stock";
+      cell5.innerHTML = "Initial Stock";
+      cell6.innerHTML = "Stock on Hand";
+      cell7.innerHTML = "Status";
+
+    }
+    function renderStock(doc) {
+  
+      var row = istable.insertRow(-1);
+      var cell0 = row.insertCell(0);
+      var cell1 = row.insertCell(1);
+      var cell2 = row.insertCell(2);
+      var cell3 = row.insertCell(3);
+      var cell4 = row.insertCell(4);
+      var cell5 = row.insertCell(5);
+      var cell6 = row.insertCell(6);
+      var cell7 = row.insertCell(7);
+      cell0.innerHTML = doc.data().itemname;
+      cell1.innerHTML = doc.data().sprice;
+      cell2.innerHTML = doc.data().discount;
+      cell3.innerHTML = doc.data().prate;
+      cell4.innerHTML = doc.data().minstock;
+      cell5.innerHTML = doc.data().initialstock;
+      cell6.innerHTML = doc.data().soh;
+      cell7.innerHTML = doc.data().status;
+
+      
+    }
+    function saveI() {
+      firebase.firestore().collection("items").doc(itemname.value).set({
+        itemname: itemname.value,
+        sprice: itemSprice.value,
+        discount: itemdiscount.value,
+        prate: itemPrate.value,
+        status: itemStatus.value,
+        minstock:minstock.value,
+        initialstock: istock.value,
+        soh: istock.value
+        })
+    }
+
+    function addItem() {
+      // document.getElementById('itemsForm').style.display = 'block';
+      // document.getElementById('setupForm').style.display = 'none';
+      // document.getElementById('companyForm').style.display = 'none';
+      // document.getElementById('stock-popup').style.display = 'none';
+      // document.getElementById('setup-popup').style.display = 'none';
+      // document.getElementById('sellhForm').style.display = 'none';
+      // document.getElementById("sellForm").style.display = "none";
+      // document.getElementById("buyForm").style.display = "none";
+      // document.getElementById("buyhForm").style.display = "none";
+      // document.getElementById("buyrecord").style.display = "none";
+      
+      // document.getElementById("sellrecord").style.display = "none";
+
+      document.getElementById('stock-popup').style.display ='none'
+      document.getElementById('setupForm').style.display = 'block';
+      document.getElementById('companyForm').style.display = 'none';
+      document.getElementById('itemsForm').style.display = 'block';
+      document.getElementById('sellhForm').style.display = 'none';
+      document.getElementById("sellForm").style.display = "none";
+      document.getElementById("buyForm").style.display = "none";
+      document.getElementById("buyhForm").style.display = "none";
+      document.getElementById("buyrecord").style.display = "none";
+      document.getElementById("sellrecord").style.display = "none";
+
+    }
+
+    saveCompany.addEventListener('click',saveC)
+    function saveC() {
+      firebase.firestore().collection("company").doc(iCname.value).set({
+        companyname: iCname.value,
+        address: iCaddr.value,
+        phone: iCphone.value,
+        faxno: iCfax.value,
+        pno: iCpno.value,
+        email: iCemail.value,
+        minstock: minstock.value
+        })
+    }
+    companyP.addEventListener('click',setCP);
+    function setCP(){
+      // document.getElementById('companyForm').style.display = 'block';
+      // document.getElementById('itemsForm').style.display = 'none';
+      // document.getElementById('stock-popup').style.display = 'none';
+      // document.getElementById('setup-popup').style.display = 'none';
+      // document.getElementById('setupForm').style.display = 'none';
+      // document.getElementById('sellhForm').style.display = 'none';
+      // document.getElementById("sellForm").style.display = "none";
+      // document.getElementById("buyForm").style.display = "none";
+      // document.getElementById("buyhForm").style.display = "none";
+      // document.getElementById("buyrecord").style.display = "none";
+      
+      // document.getElementById("sellrecord").style.display = "none";
+
+
+      document.getElementById('stock-popup').style.display ='none'
+      document.getElementById('setupForm').style.display = 'block';
+      document.getElementById('companyForm').style.display = 'block';
+      document.getElementById('itemsForm').style.display = 'none';
+      document.getElementById('sellhForm').style.display = 'none';
+      document.getElementById("sellForm").style.display = "none";
+      document.getElementById("buyForm").style.display = "none";
+      document.getElementById("buyhForm").style.display = "none";
+      document.getElementById("buyrecord").style.display = "none";
+      document.getElementById("sellrecord").style.display = "none";
+    }
+    setup.addEventListener('click',setupo);
+    function setupo(){
+      console.log("ya");
+      // document.getElementById('setupForm').style.display = 'block';
+      // document.getElementById('itemsForm').style.display = 'none';
+      // document.getElementById('companyForm').style.display = 'none';
+      // document.getElementById('stock-popup').style.display = 'none';
+      // document.getElementById('setup-popup').style.display = 'none';
+      // document.getElementById('sellhForm').style.display = 'none';
+      // document.getElementById("sellForm").style.display = "none";
+      // document.getElementById("buyForm").style.display = "none";
+      // document.getElementById("buyhForm").style.display = "none";
+      // document.getElementById("buyrecord").style.display = "none";
+      
+      // document.getElementById("sellrecord").style.display = "none";
+
+      document.getElementById('stock-popup').style.display ='none'
+      document.getElementById('setupForm').style.display = 'block';
+      document.getElementById('companyForm').style.display = 'none';
+      document.getElementById('itemsForm').style.display = 'none';
+      document.getElementById('sellhForm').style.display = 'none';
+      document.getElementById("sellForm").style.display = "none";
+      document.getElementById("buyForm").style.display = "none";
+      document.getElementById("buyhForm").style.display = "none";
+      document.getElementById("buyrecord").style.display = "none";
+      document.getElementById("sellrecord").style.display = "none";
+
+    }
 
     buyts.addEventListener('click',buyTS);
     function buyTS() {
@@ -279,13 +520,28 @@
     
     
     function openBuyForm() {
-      
-        document.getElementById('sellhForm').style.display = 'none';
-        document.getElementById("buyrecord").style.display = "none";
-        document.getElementById("sellrecord").style.display = "none";
-        document.getElementById("buyhForm").style.display = "none";
-        document.getElementById('sellForm').style.display = "none";
-        document.getElementById("buyForm").style.display = "block";
+      // document.getElementById('setupForm').style.display = 'none';
+      //   document.getElementById('sellhForm').style.display = 'none';
+      //   document.getElementById("buyrecord").style.display = "none";
+      //   document.getElementById("sellrecord").style.display = "none";
+      //   document.getElementById("buyhForm").style.display = "none";
+      //   document.getElementById('sellForm').style.display = "none";
+      //   document.getElementById('stock-popup').style.display = 'none';
+      // document.getElementById('setup-popup').style.display = 'none';
+      // document.getElementById('itemsForm').style.display = 'none';
+      // document.getElementById('companyForm').style.display = 'none';
+      //   document.getElementById("buyForm").style.display = "block";
+
+      document.getElementById('stock-popup').style.display ='none'
+      document.getElementById('setupForm').style.display = 'none';
+      document.getElementById('companyForm').style.display = 'none';
+      document.getElementById('itemsForm').style.display = 'none';
+      document.getElementById('sellhForm').style.display = 'none';
+      document.getElementById("sellForm").style.display = "none";
+      document.getElementById("buyForm").style.display = "block";
+      document.getElementById("buyhForm").style.display = "none";
+      document.getElementById("buyrecord").style.display = "none";
+      document.getElementById("sellrecord").style.display = "none";
         
     }
     var closesellbtn = document.getElementById("closesellbtn");
@@ -300,26 +556,62 @@
     }
     
     addbuybtn.addEventListener("click",addBuy)
-    
+    var soh1,soh2,temp,temp2;
+    function getsoh(doc){
+      console.log(inputQuantity.value)
+      soh1 = doc.data().soh;
+      console.log(soh1)
+      temp = Number(soh1);
+      console.log(temp)
+      soh2 = temp + Number(inputQuantity.value)
+      console.log(soh2)
+      addstock(soh2)
+      
+
+    }
+    function addstock(soh2) {
+      firebase.firestore().collection("items").doc(inputItem.value).set({
+        soh: soh2
+      },{merge: true});
+    }
     function addBuy() {
       
       seller = inputSeller.value
       // var timestampAdd = dateAdd.toDate()
       // var sdateAdd = timestampAdd.toString().slice(0,23)
+      firebase.firestore().collection("items").doc(inputItem.value).get().then(function(doc){
+        getsoh(doc)
+      })
+      console.log(inputQuantity.value)
       
+      console.log(inputItem.value)
        firebase.firestore().collection("buy").doc(inputSeller.value).collection("history").doc().set({
          seller: inputSeller.value,
          item: inputItem.value,
          quantity: inputQuantity.value,
          price: inputPrice.value,
          total: inputQuantity.value * inputPrice.value,
-         timestamp: firebase.firestore.FieldValue.serverTimestamp()
+         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+         code: iscode.value,
+         address: isaddr.value,
+         phone: isphone.value,
+         email: isemail.value,
+         faxno: isfaxno.value,
+         gstno: isgstno.value,
+         cgst: icgst.value,
+         sgst: isgst.value,
+         gtotal: Number(icgst.value) + Number(isgst.value),
+         hsn: ihsn.value,
+         pay: ipay.value,
+         discount: idisc.value,
+         pdf: '<a href="invoice.html">PDF</a>'
+
          
        });
       
        document.getElementById("inputSeller").value="";
-       document.getElementById("inputItem").value="";
-       document.getElementById("inputQuantity").value="";
+       
+       
        document.getElementById("inputPrice").value="";
        
        
@@ -358,13 +650,28 @@
 
     buyh.addEventListener("click",openbuyh)
     function openbuyh() {
-    
+      // document.getElementById('setupForm').style.display = 'none';
+      // document.getElementById('itemsForm').style.display = 'none';
+      // document.getElementById('companyForm').style.display = 'none';
+      // document.getElementById('sellhForm').style.display = 'none';
+      // document.getElementById("buyrecord").style.display = "none";
+      // document.getElementById("buyForm").style.display = "none";
+      // document.getElementById("sellForm").style.display = "none";
+      // document.getElementById("sellrecord").style.display = "none";
+      // document.getElementById('stock-popup').style.display = 'none';
+      // document.getElementById('setup-popup').style.display = 'none';
+      // document.getElementById("buyhForm").style.display = "block";
+
+      document.getElementById('stock-popup').style.display ='none'
+      document.getElementById('setupForm').style.display = 'none';
+      document.getElementById('companyForm').style.display = 'none';
+      document.getElementById('itemsForm').style.display = 'none';
       document.getElementById('sellhForm').style.display = 'none';
-      document.getElementById("buyrecord").style.display = "none";
-      document.getElementById("buyForm").style.display = "none";
       document.getElementById("sellForm").style.display = "none";
-      document.getElementById("sellrecord").style.display = "none";
+      document.getElementById("buyForm").style.display = "none";
       document.getElementById("buyhForm").style.display = "block";
+      document.getElementById("buyrecord").style.display = "none";
+      document.getElementById("sellrecord").style.display = "none";
     }
 
     var table = document.getElementById("buy-list");
@@ -408,7 +715,7 @@
     }
 
     function renderToday(doc){
-      
+      // email = localStorage.getItem("email");
       var row = table.insertRow(-1);
       var cell0 = row.insertCell(0);
       var cell1 = row.insertCell(1);
@@ -416,16 +723,29 @@
       var cell3 = row.insertCell(3);
       var cell4 = row.insertCell(4);
       var cell5 = row.insertCell(5);
+      var cell6 = row.insertCell(6);
       // var mydate = doc.data().timestamp.toDate();
       // var str = mydate.toString();
       // var putdate = str.slice(0,25); 
-
+      localStorage.setItem("dateIn",doc.data().date.slice(0,25))
+      localStorage.setItem("itemIn",doc.data().item)
+      localStorage.setItem("quanIn",doc.data().quantity)
+      localStorage.setItem("priceIn",doc.data().price)
+      localStorage.setItem("totalIn",doc.data().total)
+      localStorage.setItem("sellerIn",doc.data().seller)
+      localStorage.setItem("hsnIn",doc.data().hsn)
+      localStorage.setItem("payIn",doc.data().pay)
+      localStorage.setItem("cgstIn",doc.data().cgst)
+      localStorage.setItem("sgstIn",doc.data().sgst)
+      localStorage.setItem("gtotalIn",doc.data().gtotal)
+      localStorage.setItem("discIn",doc.data().discount)
       cell0.innerHTML = doc.data().date.slice(0,25);
       cell1.innerHTML = doc.data().item;
       cell2.innerHTML = doc.data().quantity;
       cell3.innerHTML = doc.data().price;
       cell4.innerHTML = doc.data().total;
       cell5.innerHTML = doc.data().seller;
+      cell6.innerHTML = doc.data().pdf;
       
     }
     function renderTodayS(doc){
@@ -488,18 +808,36 @@
       var cell3 = row.insertCell(3);
       var cell4 = row.insertCell(4);
       var cell5 = row.insertCell(5);
+      var cell6 = row.insertCell(6);
+      cell6.innerHTML = "INVOICE";
       cell0.innerHTML = "TIME";
       cell1.innerHTML = "ITEM";
       cell2.innerHTML = "QUANTITY";
       cell3.innerHTML = "PRICE";
       cell4.innerHTML = "TOTAL";
       cell5.innerHTML = "SELLER";
+      // document.getElementById('setupForm').style.display = 'none';
+      // document.getElementById('itemsForm').style.display = 'none';
+      // document.getElementById('companyForm').style.display = 'none';
+      // document.getElementById('sellhForm').style.display = 'none';
+      // document.getElementById("sellForm").style.display = "none";
+      // document.getElementById("buyForm").style.display = "none";
+      // document.getElementById("buyhForm").style.display = "none";
+      // document.getElementById('stock-popup').style.display = 'none';
+      // document.getElementById('setup-popup').style.display = 'none';
+      // document.getElementById("buyrecord").style.display = "block";
+     
+      // document.getElementById("sellrecord").style.display = "none";
+
+      document.getElementById('stock-popup').style.display ='none'
+      document.getElementById('setupForm').style.display = 'none';
+      document.getElementById('companyForm').style.display = 'none';
+      document.getElementById('itemsForm').style.display = 'none';
       document.getElementById('sellhForm').style.display = 'none';
       document.getElementById("sellForm").style.display = "none";
       document.getElementById("buyForm").style.display = "none";
       document.getElementById("buyhForm").style.display = "none";
       document.getElementById("buyrecord").style.display = "block";
-     
       document.getElementById("sellrecord").style.display = "none";
     }
     //////sel
@@ -529,6 +867,22 @@
       cell3.innerHTML = "PRICE";
       cell4.innerHTML = "TOTAL";
       cell5.innerHTML = "BUYER";
+      // document.getElementById('setupForm').style.display = 'none';
+      // document.getElementById('itemsForm').style.display = 'none';
+      // document.getElementById('companyForm').style.display = 'none';
+      // document.getElementById('sellhForm').style.display = 'none';
+      // document.getElementById("sellForm").style.display = "none";
+      // document.getElementById("buyForm").style.display = "none";
+      // document.getElementById("buyhForm").style.display = "none";
+      // document.getElementById("buyrecord").style.display = "none";
+      // document.getElementById('stock-popup').style.display = 'none';
+      // document.getElementById('setup-popup').style.display = 'none';
+      // document.getElementById("sellrecord").style.display = "block";
+
+      document.getElementById('stock-popup').style.display ='none'
+      document.getElementById('setupForm').style.display = 'none';
+      document.getElementById('companyForm').style.display = 'none';
+      document.getElementById('itemsForm').style.display = 'none';
       document.getElementById('sellhForm').style.display = 'none';
       document.getElementById("sellForm").style.display = "none";
       document.getElementById("buyForm").style.display = "none";
@@ -557,18 +911,36 @@
       var cell3 = row.insertCell(3);
       var cell4 = row.insertCell(4);
       var cell5 = row.insertCell(5);
+      var cell6 = row.insertCell(6);
+      cell6.innerHTML = "INVOICE";
       cell0.innerHTML = "TIME";
       cell1.innerHTML = "ITEM";
       cell2.innerHTML = "QUANTITY";
       cell3.innerHTML = "PRICE";
       cell4.innerHTML = "TOTAL";
       cell5.innerHTML = "SELLER";
+      // document.getElementById('setupForm').style.display = 'none';
+      // document.getElementById('itemsForm').style.display = 'none';
+      // document.getElementById('companyForm').style.display = 'none';
+      // document.getElementById('sellhForm').style.display = 'none';
+      // document.getElementById("sellForm").style.display = "none";
+      // document.getElementById("buyForm").style.display = "none";
+      // document.getElementById("buyhForm").style.display = "none";
+      // document.getElementById("sellrecord").style.display = "none";
+      // document.getElementById('stock-popup').style.display = 'none';
+      // document.getElementById('setup-popup').style.display = 'none';
+      // document.getElementById("buyrecord").style.display = "block";
+
+      document.getElementById('stock-popup').style.display ='none'
+      document.getElementById('setupForm').style.display = 'none';
+      document.getElementById('companyForm').style.display = 'none';
+      document.getElementById('itemsForm').style.display = 'none';
       document.getElementById('sellhForm').style.display = 'none';
       document.getElementById("sellForm").style.display = "none";
       document.getElementById("buyForm").style.display = "none";
       document.getElementById("buyhForm").style.display = "none";
-      document.getElementById("sellrecord").style.display = "none";
       document.getElementById("buyrecord").style.display = "block";
+      document.getElementById("sellrecord").style.display = "none";
     }
     
     function tableTodayS() { 
@@ -595,6 +967,22 @@
       cell3.innerHTML = "PRICE";
       cell4.innerHTML = "TOTAL";
       cell5.innerHTML = "BUYER";
+      // document.getElementById('setupForm').style.display = 'none';
+      // document.getElementById('itemsForm').style.display = 'none';
+      // document.getElementById('companyForm').style.display = 'none';
+      // document.getElementById('sellhForm').style.display = 'none';
+      // document.getElementById("sellForm").style.display = "none";
+      // document.getElementById("buyForm").style.display = "none";
+      // document.getElementById("buyhForm").style.display = "none";
+      // document.getElementById("buyrecord").style.display = "none";
+      // document.getElementById('stock-popup').style.display = 'none';
+      // document.getElementById('setup-popup').style.display = 'none';
+      // document.getElementById("sellrecord").style.display = "block";
+
+      document.getElementById('stock-popup').style.display ='none'
+      document.getElementById('setupForm').style.display = 'none';
+      document.getElementById('companyForm').style.display = 'none';
+      document.getElementById('itemsForm').style.display = 'none';
       document.getElementById('sellhForm').style.display = 'none';
       document.getElementById("sellForm").style.display = "none";
       document.getElementById("buyForm").style.display = "none";
@@ -627,13 +1015,28 @@
       cell2.innerHTML = "QUANTITY";
       cell3.innerHTML = "PRICE";
       cell4.innerHTML = "TOTAL";
+      // document.getElementById('setupForm').style.display = 'none';
+      // document.getElementById('itemsForm').style.display = 'none';
+      // document.getElementById('companyForm').style.display = 'none';
+      // document.getElementById('sellhForm').style.display = 'none';
+      // document.getElementById("sellForm").style.display = "none";
+      // document.getElementById("buyForm").style.display = "none";
+      // document.getElementById("buyhForm").style.display = "none";
+      // document.getElementById('stock-popup').style.display = 'none';
+      // document.getElementById('setup-popup').style.display = 'none';
+      // document.getElementById("buyrecord").style.display = "block";
+      // document.getElementById("sellrecord").style.display = "none";
+
+      document.getElementById('stock-popup').style.display ='none'
+      document.getElementById('setupForm').style.display = 'none';
+      document.getElementById('companyForm').style.display = 'none';
+      document.getElementById('itemsForm').style.display = 'none';
       document.getElementById('sellhForm').style.display = 'none';
       document.getElementById("sellForm").style.display = "none";
       document.getElementById("buyForm").style.display = "none";
       document.getElementById("buyhForm").style.display = "none";
       document.getElementById("buyrecord").style.display = "block";
       document.getElementById("sellrecord").style.display = "none";
-
 
     }
     function tableSellerS() {
@@ -659,6 +1062,23 @@
       cell2.innerHTML = "QUANTITY";
       cell3.innerHTML = "PRICE";
       cell4.innerHTML = "TOTAL";
+      // document.getElementById('stock-popup').style.display = 'none';
+      // document.getElementById('setup-popup').style.display = 'none';
+      // document.getElementById('setupForm').style.display = 'none';
+      // document.getElementById('itemsForm').style.display = 'none';
+      // document.getElementById('companyForm').style.display = 'none';
+      // document.getElementById('sellhForm').style.display = 'none';
+      // document.getElementById("sellForm").style.display = "none";
+      // document.getElementById("buyForm").style.display = "none";
+      // document.getElementById("buyhForm").style.display = "none";
+      // document.getElementById("buyrecord").style.display = "none";
+      
+      // document.getElementById("sellrecord").style.display = "block";
+
+      document.getElementById('stock-popup').style.display ='none'
+      document.getElementById('setupForm').style.display = 'none';
+      document.getElementById('companyForm').style.display = 'none';
+      document.getElementById('itemsForm').style.display = 'none';
       document.getElementById('sellhForm').style.display = 'none';
       document.getElementById("sellForm").style.display = "none";
       document.getElementById("buyForm").style.display = "none";
@@ -688,6 +1108,14 @@
     }
     var sellDat = document.getElementById('sellDat');
     var selld = document.getElementById('selld');
+    var logout = document.getElementById('logout');
+    logout.addEventListener('click',logo)
+    function logo() {
+        
+        firebase.auth().signOut();
+        window.location.href = "login.html"
+      
+    }
     selld.addEventListener('click',sellDate);
 
     function sellDate() {

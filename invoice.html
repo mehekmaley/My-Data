@@ -1,0 +1,556 @@
+<html>
+    <head>
+        <script src="http://dahlström.net/svg/libraries/canvas-svg/canvas-getsvg.js"></script>
+        <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-firestore.js"></script>
+        <link rel="stylesheet" href="invoice.css">
+    </head>
+    <body>
+        <div class="page printpage" id="PrintPage">
+            <div class="uppad"></div>
+            <div class="mainpage pagest">
+                <div class="headblock blocks">
+                    <div class="fromleft LogoHolder">
+                        <img src="http//hotelbalaji.in/images/logo-header.png" alt="LOGO" class="logo">
+                    </div>
+                    <div class="fromright addressDiv">
+                        <span>Company Name: </span>
+                        <span id="cname"></span></br>
+                        <span>Company Address: </span>
+                        <span class="addrspan" id="caddr" style="font-size:9pt;line-height:8pt; margin-bottom:5pt;">
+                            <!-- Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+                            text ever since the 1500s -->
+                        </span></br>
+                        <span>Company Email: </span>
+                        <span id="cemail"></span></br>
+                        <span>Company Faxno: </span>
+                        <span id="cfaxno"></span></br>
+                        <span>Company Pan no: </span>
+                        <span id="cpno"></span></br>
+                        <span>Company Phone: </span>
+                        <span id="cphone"></span></br>
+            
+                    </div>
+                </div>
+                <div class="blocks head2block">
+                    <div class="fromleft heading" style="font-size:22pt;font-weight:600;">GST INVOICE</div>
+                    <div class="fromright status"></div>
+                </div>
+                <div class="blocks head3block">
+                    <div class="fromleft heading">
+                        <div class="wrapForDet">
+                            <p class="customerName EachNameValFlds_1">
+                                <span class="title">Supplier Name</span>
+                                <span class="value" id="sname">
+                                                                    </span>
+                            </p>
+
+                            <!-- <p class=" EachNameValFlds_1"></p>
+                            <p class=" EachNameValFlds_1"></p> -->
+                            <p class="bookingID EachNameValFlds_1">
+                                    <span class="title">Date</span>
+                                    <span class="value" id="sdate">
+                                                                        </span>
+                                </p>
+
+                            <p class="bookingID EachNameValFlds_1">
+                                <span class="title">Booking ID</span>
+                                <span class="value">
+                                    OB2218050001                                </span>
+                            </p>
+
+                            <p class="invoiceNo EachNameValFlds_1">
+                                <span class="title">Invoice No</span>
+                                <span class="value">
+                                    INV2318050001                                </span>
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="fromright ExStat">
+                        <div class="statdiv">
+
+                            <!-- <p class="ChkInDate EachNameValFlds_2">
+                                <span class="title">Date</span>
+                                <span class="value" id="sdate">
+                                                                    </span>
+                            </p> -->
+                            <!-- <p class="ChkInTime EachNameValFlds_2">
+                                <span class="title">Check In Time</span>
+                                <span class="value">
+                                    10:00 AM                                </span>
+                            </p>
+                            <p class="ChkOutDate EachNameValFlds_2">
+                                <span class="title">Check Out Date</span>
+                                <span class="value">
+                                    23/05/2018                                </span>
+                            </p>
+                            <p class="ChkOutTime EachNameValFlds_2">
+                                <span class="title">Check Out Time</span>
+                                <span class="value">
+                                    05:11 PM                                </span>
+                            </p> -->
+                            <!-- <p class="AdltCount EachNameValFlds_2">
+                                <span class="title">Adults</span>
+                                <span class="value">
+                                    2                                </span>
+                            </p>
+                            <p class="ChildCount EachNameValFlds_2">
+                                <span class="title">Childrens</span>
+                                <span class="value">
+                                    0                                </span>
+                            </p>
+                            <p class="RoomCount EachNameValFlds_2">
+                                <span class="title">rooms</span>
+                                <span class="value">
+                                    1                                </span>
+                            </p> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blocks body1block">
+                                        <div class="itemsDiv holderWrap">
+                        <table class="bodytable" id="ItemsBody" cellpadding="0" cellspacing="0" border="1">
+                            <thead>
+                                <tr>
+                                    <th class="SLNo" rowspan="2" id="sno">Sl.No</th>
+                                    <th class="RoomID" rowspan="2" >Item</th>
+                                    <th class="Description" rowspan="2">Pay</th>
+                                    <th class="HSNCode" rowspan="2" >HSN Code</th>
+                                    <th class="Price" rowspan="2" >Price</th>
+                                    <th class="Date" rowspan="2" >Quantity</th>
+                                    <th class="BlankCol" rowspan="2">Discount %</th>
+                                    <th class="GSTCOL" colspan="2">GST</th>
+                                    <th class="TotalGST GSTCOL" rowspan="2">Total GST</th>
+                                    <th class="TotalRoomPrice" rowspan="2">SubTotal</th>
+                                    <th class="TotalWithGST" rowspan="2">Total</th>
+                                    <!--<th class="Discount">Discount</th><th class="PriceTot">Gross Price</th>-->
+                                </tr>
+                                <tr>
+                                    <th class="GSTRate GSTCOL" >CGST</th>
+                                    <th class="GSTRate GSTCOL" >SGST</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td id="item"></td>
+                                    <td id="pay"></td>
+                                    <td id="hsn"></td>
+                                    <td id="price"></td>
+                                    <td id="quan"></td>
+                                    <td id="disc"></td>
+                                    <td id="cgst"></td>
+                                    <td id="sgst"></td>
+                                    <td id="gtotal"></td>
+                                    <td id="total"></td>
+                                    <td id="alltotal"></td>
+
+                                </tr>
+                            </thead>
+                            
+
+                            <!-- <tfoot style="display:none;border:hidden;">
+                                <tr class="foot TotalTR">
+                                    <td class="noneed" colspan="6"></td>
+                                    <td class="ccdc">Total</td>
+                                    <td class="Total" id="total">
+                                                                            </td>
+                                </tr>
+                                <tr class="foot GSTTotalTR">
+                                    <td class="noneed" colspan="6"></td>
+                                    <td class="ccdc">Total GST</td>
+                                    <td class="GSTTotal" id="gtotal">
+                                                                            </td>
+                                </tr>
+                                <tr class="foot alltotal">
+                                    <td class="noneed" colspan="6"></td>
+                                    <td class="ccdc">All Total</td>
+                                    <td class="Total" id="alltotal">
+                                                                            </td>
+                                </tr>
+                            </tfoot> -->
+
+
+                        <!-- <tbody class="tbody-for-each-room"><tr><td class="SLNo" rowspan="2">1</td><td class="RoomID" rowspan="2">204</td><td class="Description" rowspan="2">Clasic, Single</td><td class="HSNCode" rowspan="2">996311</td><td class="Price">1100.00 x 2</td><td class="Date">22/05/2018 - 23/05/2018</td><td class="BlankCol"></td><td class="GSTRate CGST GSTCOL">5.5%</td><td class="GSTRate SGST GSTCOL">5.5%</td><td class="TotalGST GSTCOL" rowspan="2">242.00</td><td class="TotalRoomPrice" rowspan="2">3000.00</td><td class="Total" rowspan="2">3242.00</td></tr><tr class="AddOnRowsRoom"><td class="AddOnTableHolder" colspan="5"><table class="AddonTable" tabletype="addon" border="1" width="100%" sl="0" tot-sl="0">
+                    <thead class="AddOnTableHead">
+                        <tr class="AddOnTableHeadRow">
+                            <td class="Addon-SL">#</td>
+                            <td class="Addon-Name">Addon Name</td>
+                            <td class="Addon-Price">Price x Qty</td>
+                            <td class="Addon-Qty">Qty</td>
+                            <td class="Addon-Total">Total</td>
+                        </tr>
+                    </thead>
+                    <tbody class="AddOnTableBody">
+                    <tr class="AddOnTableBodyRow">
+                    <td class="Addon-SL">1</td>
+                    <td class="Addon-Name">Receiving </td>
+                    <td class="Addon-Price">400.00 x 2</td>
+                    <td class="Addon-Qty">2</td>
+                    <td class="Addon-Total">800</td>
+            </tr></tbody> -->
+                </table></td></tr></tbody></table>
+                        <table id="TotTable" border="0" cellpadding="0" cellspacing="0">
+                            <tfoot>
+                                <tr>
+                                    <!-- <td colspan="10" style="width: calc(100% - 140pt);">
+
+                                    </td> -->
+
+                                    <td colspan="2">
+                                        <table border="1" class="AllTotLTable">
+                                            <tbody>
+                                                <tr>
+                                                    <td>SubTotal</td>
+                                                    <td id="totalm"></td>
+                                                </tr>
+                                                <tr class="GSTCOL">
+                                                    <td>Total GST</td>
+                                                    <td id="gtotalm"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total</td>
+                                                    <td id="alltotalm"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="dwpad"></div>
+
+            <style class="instyle" id="styleforprint01">
+                @import url('//fonts.googleapis.com/css?family=Raleway:500,600,700,900,900i|Source+Sans+Pro:400,600,600i,700,700i,900,900i&subset=cyrillic,latin-ext');
+                @page {
+                    margin: 0pt;
+                    size: a4 portrait;
+                }
+
+
+                .page.printpage {
+                    font-family: 'Source Sans Pro', sans-serif;
+                    display: inline-block;
+                }
+
+                .mainpage {
+                    padding-top: 5em;
+                    padding-bottom: 5em;
+                    padding-left: 2em;
+                    padding-right: 2em;
+                }
+
+                .logo {
+                    height: 70pt;
+                    /* width: 170pt; */
+                    display: inline-block;
+
+                }
+
+                .blocks {
+                    position: relative;
+                }
+
+                .addressDiv {
+                    width: 200pt;
+                    display: inline-block;
+                }
+
+                .fromright {
+                    position: absolute;
+                    right: 5pt;
+                    text-align: right;
+                }
+
+                .LogoHolder {
+                    width: 200pt;
+                    display: inline-block;
+                }
+
+                .EachNameValFlds_1 .title {
+                    font-size: 10pt;
+                    font-weight: 600;
+                }
+
+                .EachNameValFlds_1 .title:after {
+                    content: ' : ';
+                }
+
+                .EachNameValFlds_1 {
+                    padding: 5pt 0pt;
+                    margin: 2pt 2pt;
+                }
+
+                .EachNameValFlds_2 {
+                    padding: 2pt 0pt;
+                    margin: 1pt 2pt;
+                    font-size: 8pt;
+                    line-height: 8pt;
+                    position: relative;
+
+                }
+
+                .EachNameValFlds_2 .title {
+                    font-size: 9pt;
+                    font-weight: 600;
+                    right: 32%;
+                    position: absolute;
+                    text-align: right;
+                }
+
+
+                .EachNameValFlds_2 .title:after {
+                    content: ' : ';
+                }
+
+
+
+                #ItemsBody {
+                    width: 100%;
+                    margin: 2em 0pt;
+                    margin-bottom: 4pt;
+                    font-size: 8pt;
+                    border-collapse: collapse;
+                }
+
+                #ItemsBody>thead>th {
+                    border-top: 1pt solid #222;
+                    border-bottom: 1pt solid #222;
+                    text-align: right;
+
+                }
+
+                #ItemsBody>tbody>tr {
+                    font-size: 8pt;
+
+                }
+
+                #ItemsBody table thead>th {
+                    font-size: 8pt;
+
+                }
+
+                #ItemsBody>tbody>tr>td {
+                    padding-top: 1pt;
+                    padding-left: 2pt;
+                    padding-right: 2pt;
+                    /* border-bottom: 1pt solid #222; */
+                    /* text-align: right; */
+                    text-align: center;
+
+                }
+
+                #ItemsBody .SLNo {
+                    width: 15pt;
+                }
+
+                #ItemsBody .Date,
+                #ItemsBody .HSNCode {
+                    /* width: 85pt; */
+                }
+
+                #ItemsBody .GSTRate {
+                    width: 30pt;
+                }
+
+                .head3block .heading {
+                    width: 200pt;
+                    display: inline-block;
+                }
+
+                .head3block .ExStat {
+                    width: 200pt;
+                    display: inline-block;
+                }
+
+                .foot {
+                    text-align: right;
+
+                }
+
+                .foot .ccdc {
+                    font-size: 1.18em;
+                    font-weight: 600;
+                }
+
+                @media print {
+                    body {
+                        margin: 0pt;
+                    }
+                }
+
+                /*2nd part*/
+
+                .blocks {
+                    margin: 0.5em 0;
+                }
+
+                .debugger.debug {
+                    height: calc(500px);
+                    position: fixed;
+                    top: 5pt;
+                    right: 5pt;
+                    z-index: 102;
+                    overflow: auto;
+                }
+
+                /*3rd Part*/
+
+                .Date {
+                    font-size: 8pt;
+                }
+
+                .Date {
+                    width: 40pt;
+                    text-align: center !important;
+                    line-height: 7pt;
+                }
+
+                .Description {
+                    width: 60pt;
+                }
+
+                .RoomID {
+                    width: 40pt;
+                }
+
+                #ItemsBody tr {
+                    vertical-align: middle;
+                }
+
+                #ItemsBody thead {
+                    font-size: 9pt;
+                    text-align: center;
+                }
+
+                #ItemsBody thead th {
+                    text-align: center;
+                }
+
+                .HSNCode {
+                    width: 40pt;
+                }
+
+
+                .Price {
+                    width: 40pt;
+                }
+
+                td.AddOnTableHolder {
+                    padding: 0pt !important;
+                    border-collapse: collapse;
+                }
+
+                #ItemsBody table {
+                    border-style: hidden;
+
+                    border-style: hidden;
+                    border-spacing: 0px;
+                    border-collapse: collapse;
+
+                    font-size: 8pt;
+                }
+
+                table.AddonTable:not([sl='0']) thead {
+                    display: none;
+                }
+
+                table.AddonTable:not([tot-sl='0']) thead {
+                    display: none;
+                }
+
+                /*
+            #ItemsBody tbody:not(:nth-of-type(1)) table.AddonTable thead {
+                display: none !important;
+            }
+
+            td.Addon-SL {
+                width: 12pt;
+            }
+
+            td.Addon-Name {
+                width: 150pt;
+            }
+
+            td.Addon-Price {
+                width: 80pt;
+            }
+
+            td.Addon-Qty {
+                width: 30pt;
+            }
+
+            td.Addon-Total {
+                width: 50pt;
+            }
+
+            */
+
+                td.Addon-SL {
+                    width: 20pt;
+                }
+
+                td.Addon-Total {
+                    width: 50pt;
+                }
+
+                td.Addon-Price {
+                    width: 70pt;
+                }
+
+                td.Addon-Name {
+                    width: calc(100% - 20pt - 50pt - 70pt - 4pt);
+
+                }
+
+                td.TotalRoomPrice {
+                    width: 60pt;
+                }
+
+                td.Total {
+                    width: 60pt;
+                }
+
+                th.TotalGST.GSTCOL {
+                    width: 50pt;
+                }
+
+                tr.AddOnTableBodyRow td {
+                    padding: 0pt 2pt;
+                    text-align: center;
+                }
+
+                #TotTable {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+
+                #TotTable .AllTotLTable {
+                    width: 121pt;
+                    border-collapse: collapse;
+                }
+
+                #TotTable .AllTotLTable td {
+                    padding: 0.4em;
+                    width: 60pt;
+
+                }
+
+                table.AllTotLTable {
+                    /* border-top: hidden; */
+                    margin-left: calc(100% - 121pt);
+                }
+            </style>
+                    </div>
+            <script src="invoice.js"></script>
+    </body>
+</html>
+

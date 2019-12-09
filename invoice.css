@@ -1,0 +1,8 @@
+.page.printpage {
+    /* width: 595pt; */
+    width: 595pt;
+    height: 842pt;
+    border: 1pt solid #ccc;
+    font-family: 'Source Sans Pro', sans-serif;
+    display: inline-block;
+}
