@@ -1116,14 +1116,14 @@
     }
     var sellDat = document.getElementById('sellDat');
     var selld = document.getElementById('selld');
-    var logout = document.getElementById('logout');
-    logout.addEventListener('click',logo)
-    function logo() {
+    // var logout = document.getElementById('logout'); //logout function
+    // logout.addEventListener('click',logo)
+    // function logo() {
         
-        firebase.auth().signOut();
-        window.location.href = "login.html"
+    //     firebase.auth().signOut();
+    //     window.location.href = "login.html"
       
-    }
+    // }
     selld.addEventListener('click',sellDate);
 
     function sellDate() {

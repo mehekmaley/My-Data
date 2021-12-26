@@ -11,17 +11,17 @@
     };
     firebase.initializeApp(config);
 
-    firebase.auth().onAuthStateChanged(function(user) {
-    if(user) {
+    // firebase.auth().onAuthStateChanged(function(user) {
+    // if(user) {
      
-        window.location.href = 'index.html';
+    //     window.location.href = 'index.html';
     
       
-    }
-    else{
-      document.getElementById("login_div").style.display = "block";
-    }
-    });
+    // }
+    // else{
+    //   document.getElementById("login_div").style.display = "block";
+    // }
+    // });
     var login1 = document.getElementById("login");
     login1.addEventListener('click',loginc)
     function loginc(){
