@@ -22,9 +22,10 @@
         
         <button type="button" id="buyh" class="open-button">BUY HISTORY</button>
         <button type="button" id="sellh" class="open-button">SELL HISTORY</button>
-        <button type="button" id="stock" class="open-button">STOCK</button>
-        <button type="button" id="setup" class="open-button">SETUP</button>
+        <!-- <button type="button" id="stock" class="open-button">STOCK</button>
+        <button type="button" id="setup" class="open-button">SETUP</button> -->
         <button type="button" id="logout" class="open-button">LOG OUT</button>
+
         </div>
     </div>
 
@@ -36,7 +37,7 @@
                     <label for="inputSeller">Seller Name</label>
                     <input type="text" class="form-control" id="inputSeller" placeholder="Enter Seller Name...">
                 </div>
-                <div>
+                <!-- <div>
                     <label>Seller Code</label>
                     <input type="text" class="form-control" id="iscode" placeholder="Enter Seller code...">
                 </div>
@@ -59,21 +60,23 @@
                 <div>
                     <label>GST No</label>
                     <input type="number" class="form-control" id="isgstno" placeholder="Enter Seller gstno...">
+                </div> -->
+                <div>
+                    <label for="inputItemS">ITEM</label>
+                    <input type="text" class="form-control" id="inputItem" placeholder="Enter Item...">
                 </div>
-                <div id="additem">
-                    <div>
+                <!-- <div id="additem"> -->
+                    
+                    <!-- <div>
                         <label for="inputItem">ITEM </label>
-                        <!-- <input type="text" class="form-control" id="inputItem" placeholder="Enter Item..."> -->
                         <select id="inputItem" class="selectpicker">
                             
-                            <!-- <option>Item Available</option> -->
-                            <!-- <option value="week">Week</option> -->
                             <option value="prawns">Prawns</option>
                             <option value="basa">Basa</option>
                            
         
                         </select>
-                    </div>
+                    </div> -->
                     <div>
                         <label for="inputQuantity">QUANTITY</label>
                         <input type="number" step="0.5" class="form-control" id="inputQuantity" placeholder="Enter Quantity ...">
@@ -82,14 +85,11 @@
                         <label for="inputPrice">PRICE</label>
                         <input type="number" step="0.01" class="form-control" id="inputPrice" placeholder="Enter Price per KG...">
                     </div>
-                    <div id="payitem">
+                    <!-- <div id="payitem">
                             <div>
                                 <label for="inputItem">PAY </label>
-                                <!-- <input type="text" class="form-control" id="inputItem" placeholder="Enter Item..."> -->
                                 <select id="ipay" class="selectpicker">
-                                    
-                                    <!-- <option>Item Available</option> -->
-                                    <!-- <option value="week">Week</option> -->
+                            
                                     <option value="COD">COD</option>
                                     <option value="UPI">UPI</option>
                                     <option value="Credit">Credit</option>
@@ -114,8 +114,8 @@
                         <label>SGST Rate</label>
                         <input type="number" step="0.01" class="form-control" id="isgst" placeholder="Enter SGST...">
                     </div>
-                </div>
-            </div>
+                    </div> -->
+                <!-- </div> -->
             </form>
             <div style="text-align:left;">
                 <button type="reset" value="Reset" class="btn" id="addbuybtn" >Add</button>
@@ -204,14 +204,14 @@
                     <label for="inputCaddr">Address</label>
                     <input type="text" class="form-control" id="iCaddr" placeholder="Enter Address(area,city,state)...">
                 </div>
-                <div>
+                <!-- <div>
                     <label for="iCphone">Phone</label>
                     <input type="number" class="form-control" id="iCphone" placeholder="Enter Phone..>
                 </div>
                 <div>
                     <label for="iCfax">Fax No</label>
                     <input type="number" class="form-control" id="iCfax" placeholder="Enter Fax No...">
-                </div>
+                </div> -->
                 <div>
                     <label for="iCpno">Pan No</label>
                     <input type="number" class="form-control" id="iCpno" placeholder="Enter Pan No...">
@@ -539,7 +539,7 @@
             </tr>
         </table>
     </div>
-
+    
     <script src="main.js" ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
     </script>

@@ -322,7 +322,7 @@
     var istock = document.getElementById('istock');
     var stock = document.getElementById('stock')
     var stockh = document.getElementById("stockh")
-    stock.addEventListener('click',stocks)
+    // stock.addEventListener('click',stocks)
     function stocks() {
       document.getElementById('stock-popup').style.display ='block'
       document.getElementById('setupForm').style.display = 'none';
@@ -468,7 +468,7 @@
       document.getElementById("buyrecord").style.display = "none";
       document.getElementById("sellrecord").style.display = "none";
     }
-    setup.addEventListener('click',setupo);
+    // setup.addEventListener('click',setupo); new entries,325
     function setupo(){
       console.log("ya");
       // document.getElementById('setupForm').style.display = 'block';
@@ -540,7 +540,7 @@
       // document.getElementById('itemsForm').style.display = 'none';
       // document.getElementById('companyForm').style.display = 'none';
       //   document.getElementById("buyForm").style.display = "block";
-
+      console.log("buy should open")
       document.getElementById('stock-popup').style.display ='none'
       document.getElementById('setupForm').style.display = 'none';
       document.getElementById('companyForm').style.display = 'none';
@@ -588,9 +588,9 @@
       seller = inputSeller.value
       // var timestampAdd = dateAdd.toDate()
       // var sdateAdd = timestampAdd.toString().slice(0,23)
-      firebase.firestore().collection("items").doc(inputItem.value).get().then(function(doc){
-        getsoh(doc)
-      })
+      // firebase.firestore().collection("items").doc(inputItem.value).get().then(function(doc){
+      //   getsoh(doc)
+      // })
       console.log(inputQuantity.value)
       
       console.log(inputItem.value)
@@ -601,26 +601,25 @@
          price: inputPrice.value,
          total: inputQuantity.value * inputPrice.value,
          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-         code: iscode.value,
-         address: isaddr.value,
-         phone: isphone.value,
-         email: isemail.value,
-         faxno: isfaxno.value,
-         gstno: isgstno.value,
-         cgst: icgst.value,
-         sgst: isgst.value,
-         gtotal: Number(icgst.value) + Number(isgst.value),
-         hsn: ihsn.value,
-         pay: ipay.value,
-         discount: idisc.value,
+        //  code: iscode.value,
+        //  address: isaddr.value,
+        //  phone: isphone.value,
+        //  email: isemail.value,
+        //  faxno: isfaxno.value,
+        //  gstno: isgstno.value,
+        //  cgst: icgst.value,
+        //  sgst: isgst.value,
+        //  gtotal: Number(icgst.value) + Number(isgst.value),
+        //  hsn: ihsn.value,
+        //  pay: ipay.value,
+        //  discount: idisc.value,
          pdf: '<a href="invoice.html">PDF</a>'
-
          
        });
       
        document.getElementById("inputSeller").value="";
-       
-       
+       document.getElementById("inputItem").value="";
+       document.getElementById("inputQuantity").value="";
        document.getElementById("inputPrice").value="";
        
        
