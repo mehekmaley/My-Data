@@ -15,16 +15,16 @@
   
     //User Form
   
-    firebase.auth().onAuthStateChanged(function(user) {
-      if(user) {
-        // window.location.href = 'index1.html';
-        console.log("hi")
+    // firebase.auth().onAuthStateChanged(function(user) {
+    //   if(user) {
+    //     // window.location.href = 'index1.html';
+    //     console.log("hi")
       
-      }
-      else{
-        window.location.href = 'login.html'
-      }
-      });
+    //   }
+    //   else{
+    //     window.location.href = 'login.html'
+    //   }
+    //   });
 
 
     var str;
